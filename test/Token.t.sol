@@ -12,6 +12,7 @@ contract TokenTest is Test {
     address public charlie = makeAddr("charlie");
 
     function setUp() public {
+        // vm.prank(alice);
         token = new Token();
     }
 
@@ -220,7 +221,11 @@ contract TokenTest is Test {
     ///      2. Verifique que retorna true
     ///      3. Verifique o balanceOf de alice
     function test_Mint_Success() public {
-        // TODO: Implementar este teste
+        vm.prank(address(this));
+        bool result = token.mint(alice, 1500);
+
+        assertEq(result, true);
+        assertEq(token.balanceOf(alice), 1500);
     }
 
     function test_Mint_RevertsWhenCallerIsNotOwner() public {
