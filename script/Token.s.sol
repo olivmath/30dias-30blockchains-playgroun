@@ -32,7 +32,7 @@ contract TokenScript is Script {
         // === Rede 1 ===
         vm.createSelectFork("sepolia");
         address predicted = vm.computeCreate2Address(salt, initCode, deployer);
-        console.log("Endereço previsto Sepolia:", predicted);
+        console.log("Endereco previsto Sepolia:", predicted);
 
         vm.startBroadcast();
         new MeuContrato{salt: salt}();        // ← aqui usa CREATE2
@@ -41,7 +41,7 @@ contract TokenScript is Script {
         // === Rede 2 ===
         vm.createSelectFork("base-sepolia");
         predicted = vm.computeCreate2Address(salt, initCode, deployer);
-        console.log("Endereço previsto Base Sepolia:", predicted);
+        console.log("Endereco previsto Base Sepolia:", predicted);
 
         vm.startBroadcast();
         new MeuContrato{salt: salt}();
