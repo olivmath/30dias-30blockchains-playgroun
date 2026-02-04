@@ -17,34 +17,35 @@ contract TokenScript is Script {
         // ... L2
 
 
-        // === CONFIGURAÇÃO ===
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        address deployer = vm.addr(deployerPrivateKey);
-        bytes32 salt = keccak256("MEU_SALT_UNICO_2025"); // ← mude para algo único seu
 
-        // Se o construtor tiver argumentos, ajuste aqui
-        bytes memory initCode = type(MeuContrato).creationCode; // sem args
-        // Exemplo com args: bytes memory initCode = abi.encodePacked(
-        //     type(MeuContrato).creationCode,
-        //     abi.encode(arg1, arg2)
-        // );
+    //     // === CONFIGURAÇÃO ===
+    //     uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+    //     address deployer = vm.addr(deployerPrivateKey);
+    //     bytes32 salt = keccak256("MEU_SALT_UNICO_2025"); // ← mude para algo único seu
 
-        // === Rede 1 ===
-        vm.createSelectFork("sepolia");
-        address predicted = vm.computeCreate2Address(salt, initCode, deployer);
-        console.log("Endereco previsto Sepolia:", predicted);
+    //     // Se o construtor tiver argumentos, ajuste aqui
+    //     bytes memory initCode = type(Token).creationCode; // sem args
+    //     // Exemplo com args: bytes memory initCode = abi.encodePacked(
+    //     //     type(MeuContrato).creationCode,
+    //     //     abi.encode(arg1, arg2)
+    //     // );
 
-        vm.startBroadcast();
-        new MeuContrato{salt: salt}();        // ← aqui usa CREATE2
-        vm.stopBroadcast();
+    //     // === Rede 1 ===
+    //     vm.createSelectFork("sepolia");
+    //     address predicted = vm.computeCreate2Address(salt, initCode, deployer);
+    //     console.log("Endereco previsto Sepolia:", predicted);
 
-        // === Rede 2 ===
-        vm.createSelectFork("base-sepolia");
-        predicted = vm.computeCreate2Address(salt, initCode, deployer);
-        console.log("Endereco previsto Base Sepolia:", predicted);
+    //     vm.startBroadcast();
+    //     new MeuContrato{salt: salt}();        // ← aqui usa CREATE2
+    //     vm.stopBroadcast();
 
-        vm.startBroadcast();
-        new MeuContrato{salt: salt}();
-        vm.stopBroadcast();
+    //     // === Rede 2 ===
+    //     vm.createSelectFork("base-sepolia");
+    //     predicted = vm.computeCreate2Address(salt, initCode, deployer);
+    //     console.log("Endereco previsto Base Sepolia:", predicted);
+
+    //     vm.startBroadcast();
+    //     new MeuContrato{salt: salt}();
+    //     vm.stopBroadcast();
     }
 }
