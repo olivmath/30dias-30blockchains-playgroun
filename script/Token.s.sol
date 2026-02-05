@@ -36,13 +36,6 @@ contract TokenScript is Script {
         vm.stopBroadcast();
         console.log("Optimism:", address(op));
 
-        // === zkSync ===
-        vm.createSelectFork("zksync");
-        vm.startBroadcast();
-        Token zk = new Token{salt: salt}();
-        vm.stopBroadcast();
-        console.log("zkSync:", address(zk));
-
         // === Polygon ===
         vm.createSelectFork("polygon");
         vm.startBroadcast();
