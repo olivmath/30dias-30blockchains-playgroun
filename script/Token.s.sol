@@ -1,51 +1,60 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {Script} from "forge-std/Script.sol";
+import {Script, console} from "forge-std/Script.sol";
 import {Token} from "../src/Token.sol";
 
 contract TokenScript is Script {
-    Token public token;
-
-    function setUp() public {}
-
     function run() public {
-        // optimism
-        // arbitrum
-        // polygon
-        // zksync
-        // ... L2
+        bytes32 salt = keccak256("LUZ_TOKEN_2025");
 
+        // === Ethereum Sepolia ===
+        vm.createSelectFork("sepolia");
+        vm.startBroadcast();
+        Token sepolia = new Token{salt: salt}();
+        vm.stopBroadcast();
+        console.log("Sepolia:", address(sepolia));
 
+        // === BNB Chain ===
+        vm.createSelectFork("bnb");
+        vm.startBroadcast();
+        Token bnb = new Token{salt: salt}();
+        vm.stopBroadcast();
+        console.log("BNB Chain:", address(bnb));
 
-    //     // === CONFIGURAÇÃO ===
-    //     uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-    //     address deployer = vm.addr(deployerPrivateKey);
-    //     bytes32 salt = keccak256("MEU_SALT_UNICO_2025"); // ← mude para algo único seu
+        // === Arbitrum ===
+        vm.createSelectFork("arbitrum");
+        vm.startBroadcast();
+        Token arb = new Token{salt: salt}();
+        vm.stopBroadcast();
+        console.log("Arbitrum:", address(arb));
 
-    //     // Se o construtor tiver argumentos, ajuste aqui
-    //     bytes memory initCode = type(Token).creationCode; // sem args
-    //     // Exemplo com args: bytes memory initCode = abi.encodePacked(
-    //     //     type(MeuContrato).creationCode,
-    //     //     abi.encode(arg1, arg2)
-    //     // );
+        // === Optimism ===
+        vm.createSelectFork("optimism");
+        vm.startBroadcast();
+        Token op = new Token{salt: salt}();
+        vm.stopBroadcast();
+        console.log("Optimism:", address(op));
 
-    //     // === Rede 1 ===
-    //     vm.createSelectFork("sepolia");
-    //     address predicted = vm.computeCreate2Address(salt, initCode, deployer);
-    //     console.log("Endereco previsto Sepolia:", predicted);
+        // === zkSync ===
+        vm.createSelectFork("zksync");
+        vm.startBroadcast();
+        Token zk = new Token{salt: salt}();
+        vm.stopBroadcast();
+        console.log("zkSync:", address(zk));
 
-    //     vm.startBroadcast();
-    //     new MeuContrato{salt: salt}();        // ← aqui usa CREATE2
-    //     vm.stopBroadcast();
+        // === Polygon ===
+        vm.createSelectFork("polygon");
+        vm.startBroadcast();
+        Token poly = new Token{salt: salt}();
+        vm.stopBroadcast();
+        console.log("Polygon:", address(poly));
 
-    //     // === Rede 2 ===
-    //     vm.createSelectFork("base-sepolia");
-    //     predicted = vm.computeCreate2Address(salt, initCode, deployer);
-    //     console.log("Endereco previsto Base Sepolia:", predicted);
-
-    //     vm.startBroadcast();
-    //     new MeuContrato{salt: salt}();
-    //     vm.stopBroadcast();
+        // === Base ===
+        vm.createSelectFork("base");
+        vm.startBroadcast();
+        Token baseToken = new Token{salt: salt}();
+        vm.stopBroadcast();
+        console.log("Base:", address(baseToken));
     }
 }
