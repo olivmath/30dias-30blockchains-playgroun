@@ -15,39 +15,41 @@ contract TokenScript is Script {
         vm.stopBroadcast();
         console.log("Sepolia:", address(sepolia));
 
-        // === BNB Chain ===
-        vm.createSelectFork("bnb");
-        vm.startBroadcast();
-        Token bnb = new Token{salt: salt}();
-        vm.stopBroadcast();
-        console.log("BNB Chain:", address(bnb));
-
-        // === Arbitrum ===
-        vm.createSelectFork("arbitrum");
-        vm.startBroadcast();
-        Token arb = new Token{salt: salt}();
-        vm.stopBroadcast();
-        console.log("Arbitrum:", address(arb));
-
-        // === Optimism ===
-        vm.createSelectFork("optimism");
-        vm.startBroadcast();
-        Token op = new Token{salt: salt}();
-        vm.stopBroadcast();
-        console.log("Optimism:", address(op));
-
-        // === Polygon ===
-        vm.createSelectFork("polygon");
-        vm.startBroadcast();
-        Token poly = new Token{salt: salt}();
-        vm.stopBroadcast();
-        console.log("Polygon:", address(poly));
-
         // === Base ===
         vm.createSelectFork("base");
         vm.startBroadcast();
         Token baseToken = new Token{salt: salt}();
         vm.stopBroadcast();
         console.log("Base:", address(baseToken));
+
+        // === BNB Chain ===
+        // vm.createSelectFork("bnb");
+        // vm.startBroadcast();
+        // Token bnb = new Token{salt: salt}();
+        // vm.stopBroadcast();
+        // console.log("BNB Chain:", address(bnb));
+
+        // // === Arbitrum ===
+        // vm.createSelectFork("arbitrum");
+        // vm.startBroadcast();
+        // Token arb = new Token{salt: salt}();
+        // vm.stopBroadcast();
+        // console.log("Arbitrum:", address(arb));
+
+        // // === Optimism ===
+        // vm.createSelectFork("optimism");
+        // vm.startBroadcast();
+        // Token op = new Token{salt: salt}();
+        // vm.stopBroadcast();
+        // console.log("Optimism:", address(op));
+
+        // // === Polygon ===
+        // vm.createSelectFork("polygon");
+        // vm.startBroadcast();
+        // Token poly = new Token{salt: salt}();
+        // vm.stopBroadcast();
+        // console.log("Polygon:", address(poly));
+
+        
     }
 }

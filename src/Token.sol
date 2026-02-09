@@ -14,14 +14,12 @@ contract Token {
     uint256 currentSupply = 0;
     address _owner;
 
-    mapping(address => mapping(address => uint256)) private _allowance;
-    mapping(address => uint256) private _balances;
-    //  | 0xd375... | 0x000...a |
-    //  | 0xd375... | 0x000...a |
-    //  | 0xd375... | 0x000...a |
-    //  | 0xd375... | 0x000...a |
-    //  | 0xd375... | 0x000...a |
-    //  | 0xd375... | 0x000...a |
+    mapping(address sponsor => mapping(address spender => uint256 amount)) private _allowance;
+    mapping(address onwer => uint256 amount) private _balances;
+    //  | lucas | 10 |
+    //  | marcos | 102 |
+    //  | eduardo | 40 |
+    //  | eduardoadp | 60 |
 
     constructor() {
         _owner = msg.sender;
@@ -36,7 +34,7 @@ contract Token {
     }
 
     function decimals() public pure returns (uint8) {
-        // | 100 == 1,00, 1000 == 10,00
+        // | 100 == 1,00 | 1000 == 10,00
         return 2;
     }
 
@@ -51,11 +49,11 @@ contract Token {
     }
 
     // @ quantos tokens seus alguém pode gastar
-    function allowance(address owner, address spender) public view returns (uint256 amount) {
-        //   * owner: address | quem tem os tokens
-        //   * spender: address | quem recebeu approve para gastar tokens do owner
-        //   * returns(amount): uint256 | quantos tokens o spender pode gastar do owner
-        amount = _allowance[owner][spender];
+    function allowance(address sponsor, address spender) public view returns (uint256 amount) {
+        //   * sponsor: address | quem tem os tokens
+        //   * spender: address | quem recebeu approve para gastar tokens do sponsor
+        //   * returns(amount): uint256 | quantos tokens o spender pode gastar do sponsor
+        amount = _allowance[sponsor][spender];
     }
 
     // transfer
